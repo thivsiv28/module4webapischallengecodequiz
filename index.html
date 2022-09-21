@@ -9,18 +9,48 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    
+    <div class="timerbtn">
     <h4 class="time" style="text-align:end;"></h4>
-    <h1>Coding Quiz</h1>
-    <p class="intro">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds. </p>
-    <button type="button" class="btn btn-outline-primary">View High Scores</button>
-
+    </div>
 
     <div class="container">
-        <div class="center">
+        <div class="home center content-colum">
+
+        <h1>Coding Quiz</h1>
+
+    <p class="intro">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds. </p>
+
           <button type="button" id="startGameBtn"class="btn btn-outline-primary">Start Game</button>
+
+          <button type="button" class="btn btn-outline-primary">View High Scores</button>
+        <div class="questions">
+          <h2>
+            Question:
+        </h2>
+        <h3>
+            Answer:
+            <button>1.</button>
+            <button>2.</button>
+            <button>3.</button>
+            <button>4.</button>
+        </h3>
         </div>
+
+        </div>
+
       </div>
+
+
+      <section>
+
+       <h3> Initials</h3> 
+       <input type="text">
+       <button type="button" class="btn btn-outline-primary">Submit</button>
+        <h2> High Scores</h2>
+        <ul class="users"></ul>
+        <button type="button" class="btn btn-outline-primary replay">Play Again</button>
+
+      </section>
 
     <script src="./assets/js/script.js"></script>
 </body>

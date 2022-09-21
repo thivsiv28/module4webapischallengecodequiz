@@ -1,5 +1,6 @@
 var timer = document.querySelector(".time");
 var btnStartGame = document.querySelector("#startGameBtn");
+var btnPlayAgain = document.querySelector(".replay");
 var questions = [
     {   
         question: "What does HTML stand for?",
@@ -20,7 +21,7 @@ var questions = [
     },
 
     { 
-        ququestion: "How do you select an element with the id=demo?",
+        question: "How do you select an element with the id=demo?",
         choice1: "1. demo",
         choice2: "2. #demo",
         choice3: "3. .demo",
@@ -29,7 +30,7 @@ var questions = [
     },
 
     { 
-        ququestion: "Inside which HTML element do we put the Javascript?",
+        question: "Inside which HTML element do we put the Javascript?",
         choice1: "1. <Strings>",
         choice2: "2. <Booleans>",
         choice3: "3. <JS>",
@@ -38,7 +39,7 @@ var questions = [
     },
 
     { 
-        ququestion: "How do you declare a JavaScript variable?",
+        question: "How do you declare a JavaScript variable?",
         choice1: "1. var myPassword;",
         choice2: "2. v myPassword;",
         choice3: "3. variable myPassword;",
@@ -46,6 +47,8 @@ var questions = [
         answer: "1. var myPassword;",
     }
 ];
+
+var quizQuestions = document.querySelector('.questions');
 
 var secondsLeft = 60;
 
@@ -62,8 +65,44 @@ function setTime() {
 
 setTime();
 
-function startGame() {
+function beginQuiz() {
+   // how to get questions to show up and everything else to go away? hide 
     
 };
 
-btnStartGame.addEventListener("click"); 
+function quizContent () {
+    //getting the questions to show up one by one
+};
+
+function correctAnswer () {
+    //alert for right answer to show up 
+};
+
+function wrongAnswer () {
+    //alert for wrong answer to show up and that time id deducted
+    //timer to go down by 10 seconds here as well so secondsLeft = secondsleft -10?
+};
+
+function solution () {
+ // how to get the right answer from index to show up 
+
+};
+
+function scoreRender () {
+    //showing the high score or theyre score
+};
+
+function submitInitial () {
+};
+
+function generateScore () {
+    //local storage comes in play here?
+};
+
+function playAgain () {
+
+};
+
+btnStartGame.addEventListener("click", beginQuiz); 
+
+btnPlayAgain.addEventListener("click", playAgain)
