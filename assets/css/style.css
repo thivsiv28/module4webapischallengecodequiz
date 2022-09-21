@@ -1,0 +1,31 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:rgb(4, 44, 131);
+    font-weight: bold;
+    background-color: rgb(184, 144, 107);
+}
+
+.title {
+
+    text-align: center;
+}
+
+
+.intro {
+    text-align: center;
+}
+
+.container {
+    height: 200px;
+    position: relative;
+    border:none;
+  }
+  
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
