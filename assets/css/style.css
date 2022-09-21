@@ -50,3 +50,12 @@ body {
     flex-direction: column;
     margin-bottom: 9px;
   }
+
+  .hidden {
+    display: none;
+  }
+
+  .answerChoice {
+    display: block;
+    width: 500px;
+  }
