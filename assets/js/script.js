@@ -5,6 +5,8 @@ var btnSubmitInitials = document.querySelector(".submitInitials");
 var btnViewHighScores = document.querySelector(".highscore");
 const startingPage = document.getElementById("startingPage");
 let currentQuestionIndex = 0;
+// let finalScore = document.querySelector("#finalscore");
+// let score =0;
 
 
 var questions = [
@@ -24,32 +26,23 @@ var questions = [
         answer: 2,
     },
 
-    // { 
-    //     question: "How do you select an element with the id=demo?",
-    //     choice1: "1. demo",
-    //     choice2: "2. #demo",
-    //     choice3: "3. .demo",
-    //     choice4: "4. *demo",
-    //     answer: "2. #demo",
-    // },
+    { 
+        question: "How do you select an element with the id=demo?",
+        choices: ["demo", "#demo", ".demo", "*demo"],
+        answer: 1,
+    },
 
-    // { 
-    //     question: "Inside which HTML element do we put the Javascript?",
-    //     choice1: "1. <Strings>",
-    //     choice2: "2. <Booleans>",
-    //     choice3: "3. <JS>",
-    //     choice4: "4. <script>",
-    //     answer: "4. <script>",
-    // },
+    { 
+        question: "Inside which HTML element do we put the Javascript?",
+        choices: ["<Strings>","<Booleans>","<JS>","<script>"],
+        answer: 3,
+    },
 
-    // { 
-    //     question: "How do you declare a JavaScript variable?",
-    //     choice1: "1. var myPassword;",
-    //     choice2: "2. v myPassword;",
-    //     choice3: "3. variable myPassword;",
-    //     choice4: "4. my variable is declared and its called mypassword;",
-    //     answer: "1. var myPassword;",
-    // }
+    { 
+        question: "How do you declare a JavaScript variable?",
+        choices: ["var myPassword", "v myPassword", "variable myPassword", "my variable is declared"],
+        answer: 0,
+    }
 ];
 
 var quizQuestions = document.querySelector('.questions');
@@ -62,6 +55,7 @@ function setTime() {
         timer.textContent = "Time Remaining: " + secondsLeft;
 
         if (secondsLeft === 0) {
+            alert('Time is up');
             clearInterval(timerInterval);
         }
     }, 1000);
@@ -103,13 +97,6 @@ function quizContent() {
         label.prependTo('#answerList');
     }
 
-
-
-};
-
-function correctAnswer() {
-    //alert for right answer to show up 
-
 };
 
 function wrongAnswer() {
@@ -117,13 +104,10 @@ function wrongAnswer() {
     //timer to go down by 10 seconds here as well so secondsLeft = secondsleft -10?
 };
 
-function solution() {
-    // how to get the right answer from index to show up 
-
-};
 
 function scoreRender() {
     //showing the high score or theyre score
+
 };
 
 function submitInitial() {
@@ -134,9 +118,11 @@ function generateScore() {
 
 };
 
-function highScores() {
-    //viewing highscores
-};
+// function increment() {
+//     var counterPoints= document.querySelector("#finalscore");
+//     counterPoints.innerText = ++score;
+//     finalScore.style.display = "block";
+// };
 
 function playAgain() {
     location.reload();
@@ -151,9 +137,10 @@ $(document).ready(function() {
         let userAnswer = $("input[name=choice]:checked").val();
 
         if (userAnswer == correctAnswer) { 
-            console.log('yes')
+            alert('Correct')// console.log('yes')
         } else {
-             console.log('wrong');
+           alert('That is incorrect, your time will reduce by 10 seconds!')
+           secondsLeft = secondsLeft - 10; //  console.log('wrong');
         }
 
         $(".answerChoice").remove();
@@ -166,7 +153,8 @@ $(document).ready(function() {
         currentQuestionIndex++;
 
         if (currentQuestionIndex == questions.length) {
-            console.log('reached end of questions');
+        //   increment();  
+        console.log('reached end of questions');
         } else {
 
             quizContent();
