@@ -1,13 +1,13 @@
 var timer = document.querySelector(".time");
 var btnStartGame = document.querySelector("#startGameBtn");
 var btnPlayAgain = document.querySelector(".replay");
-var btnSubmitInitials = document.querySelector(".submitInitials");
+const btnSubmitInitials = $("#submitInitials");
 var btnViewHighScores = document.querySelector(".highscore");
 const startingPage = document.getElementById("startingPage");
+let finalPage = document.getElementById(".scores");
 let currentQuestionIndex = 0;
-// let finalScore = document.querySelector("#finalscore");
-let score =0;
-
+let finalResults = document.querySelector("#finalscore");
+let score = 0;
 
 
 var questions = [
@@ -21,42 +21,42 @@ var questions = [
         answer: 3,
     },
 
-    {
-        question: "How do you insert a comment in a CSS file",
-        choices: ["// this is a comment //", "<!!this is a comment!!>", "/*this is a comment*/", "//this is a comment//"],
-        answer: 2,
-    },
+    // {
+    //     question: "How do you insert a comment in a CSS file",
+    //     choices: ["// this is a comment //", "<!!this is a comment!!>", "/*this is a comment*/", "//this is a comment//"],
+    //     answer: 2,
+    // },
 
-    { 
-        question: "How do you select an element with the id=demo?",
-        choices: ["demo", "#demo", ".demo", "*demo"],
-        answer: 1,
-    },
+    // {
+    //     question: "How do you select an element with the id=demo?",
+    //     choices: ["demo", "#demo", ".demo", "*demo"],
+    //     answer: 1,
+    // },
 
-    { 
-        question: "Inside which HTML element do we put the Javascript?",
-        choices: ["<Strings>","<Booleans>","<JS>","<script>"],
-        answer: 3,
-    },
+    // {
+    //     question: "Inside which HTML element do we put the Javascript?",
+    //     choices: ["<Strings>", "<Booleans>", "<JS>", "<script>"],
+    //     answer: 3,
+    // },
 
-    { 
-        question: "How do you declare a JavaScript variable?",
-        choices: ["var myPassword", "v myPassword", "variable myPassword", "my variable is declared"],
-        answer: 0,
-    }
+    // {
+    //     question: "How do you declare a JavaScript variable?",
+    //     choices: ["var myPassword", "v myPassword", "variable myPassword", "my variable is declared"],
+    //     answer: 0,
+    // }
 ];
 
 var quizQuestions = document.querySelector('.questions');
 
-var secondsLeft = 60;
+let secondsLeft = 10;
 
 function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timer.textContent = "Time Remaining: " + secondsLeft;
 
-        if (secondsLeft === 0) {
-            alert('Time is up');
+        if (secondsLeft <= 0) {
+            // alert('Time is up');
             clearInterval(timerInterval);
             endGame();
         }
@@ -65,8 +65,18 @@ function setTime() {
 
 function endGame() {
     timer.style.display = "block";
-    timer.textContent= ("DONE-GAME FINISHED");
+    timer.textContent = ("DONE-GAME FINISHED");
+    $("#scores").show();
+    $("#questions").hide();
+    secondsLeft = 0;
+    $("#finalscore").text("Your score is:" + score);
+
 }
+
+/* 
+            display initials along with score
+            automattically save the highest score
+            display score when highscore button clicked*/
 
 
 function beginQuiz() {
@@ -88,13 +98,13 @@ function quizContent() {
 
 
         let input = $("<input>", {
-            
+
             value: [i],
             type: 'radio',
             name: 'choice',
         });
 
-      let label =  $("<label>", {
+        let label = $("<label>", {
             text: currentQuestion.choices[i],
             class: 'answerChoice',
         });
@@ -104,25 +114,28 @@ function quizContent() {
     }
 
 };
+//saving THE SCORE on storage but need for display screen
+function finalScore() {
+    let endingScore = {
+        score: score,
+        initial: $("#initials").val(),
+    }
 
-// function wrongAnswer() {
-//     //alert for wrong answer to show up and that time id deducted
-//     //timer to go down by 10 seconds here as well so secondsLeft = secondsleft -10?
-// };
+    console.log("endingScore"),
+        localStorage.setItem("endingScore", JSON.stringify(endingScore));
+}
 
+function viewHighScore() {
 
-// function scoreRender() {
-//     //showing the high score or theyre score
-
-// };
-
-// function submitInitial() {
-// };
-
-// function generateScore() {
-//     //local storage comes in play here?get item set item
-
-// };
+    let recentScore = JSON.parse(localStorage.getItem(endingScore));
+    if (recentScore == null) {
+        finalResults.innerHTML = "Not Available Yet"
+    }
+    //have to make the display unhidden here and how to get the score up plus also making last page go away
+    else {
+        finalResults.innerHTML = recentScore.initial + recentScore.score;
+    }
+};
 
 // function increment() {
 //     var counterPoints= document.querySelector("#finalscore");
@@ -131,29 +144,30 @@ function quizContent() {
 // };
 
 function playAgain() {
+
     location.reload();
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
     $("#submitAnswer").click(function (event) {
         event.preventDefault();
-        debugger;
+      
         let correctAnswer = questions[currentQuestionIndex].answer;
 
         let userAnswer = $("input[name=choice]:checked").val();
 
-        if (userAnswer == correctAnswer) { 
-            alert('Correct');
+        if (userAnswer == correctAnswer) {
+            // alert('Correct');
             // score = ++score;// console.log('yes')
             // score = score+1;
             // score += 1;
             score++; //increment by 1 so 2 goes to 3, returns 2
             // ++score; //increment by 1 so 2 goes to 3, returns 3,
-            
+
 
         } else {
-           alert('That is incorrect, your time will reduce by 10 seconds!')
-           secondsLeft = secondsLeft - 10; //  console.log('wrong');
+            // alert('That is incorrect, your time will reduce by 10 seconds!')
+            secondsLeft = secondsLeft - 10; //  console.log('wrong');
         }
 
         $(".answerChoice").remove();
@@ -166,8 +180,12 @@ $(document).ready(function() {
         currentQuestionIndex++;
 
         if (currentQuestionIndex == questions.length) {
-        //   increment();  
-        console.log('reached end of questions');
+            //   increment()
+            
+
+           
+            endGame();
+            console.log('reached end of questions');
         } else {
 
             quizContent();
@@ -179,6 +197,7 @@ btnStartGame.addEventListener("click", beginQuiz);
 
 btnPlayAgain.addEventListener("click", playAgain);
 
-// btnSubmitInitials.addEventListener("click", submitInitial);
+btnSubmitInitials.click(finalScore);
 
-// btnViewHighScores.addEventListener("click", highScores)
+
+btnViewHighScores.addEventListener("click", viewHighScore);
