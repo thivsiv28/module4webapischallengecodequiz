@@ -6,7 +6,8 @@ var btnViewHighScores = document.querySelector(".highscore");
 const startingPage = document.getElementById("startingPage");
 let currentQuestionIndex = 0;
 // let finalScore = document.querySelector("#finalscore");
-// let score =0;
+let score =0;
+
 
 
 var questions = [
@@ -57,10 +58,15 @@ function setTime() {
         if (secondsLeft === 0) {
             alert('Time is up');
             clearInterval(timerInterval);
+            endGame();
         }
     }, 1000);
 };
 
+function endGame() {
+    timer.style.display = "block";
+    timer.textContent= ("DONE-GAME FINISHED");
+}
 
 
 function beginQuiz() {
@@ -99,24 +105,24 @@ function quizContent() {
 
 };
 
-function wrongAnswer() {
-    //alert for wrong answer to show up and that time id deducted
-    //timer to go down by 10 seconds here as well so secondsLeft = secondsleft -10?
-};
+// function wrongAnswer() {
+//     //alert for wrong answer to show up and that time id deducted
+//     //timer to go down by 10 seconds here as well so secondsLeft = secondsleft -10?
+// };
 
 
-function scoreRender() {
-    //showing the high score or theyre score
+// function scoreRender() {
+//     //showing the high score or theyre score
 
-};
+// };
 
-function submitInitial() {
-};
+// function submitInitial() {
+// };
 
-function generateScore() {
-    //local storage comes in play here?get item set item
+// function generateScore() {
+//     //local storage comes in play here?get item set item
 
-};
+// };
 
 // function increment() {
 //     var counterPoints= document.querySelector("#finalscore");
@@ -137,7 +143,14 @@ $(document).ready(function() {
         let userAnswer = $("input[name=choice]:checked").val();
 
         if (userAnswer == correctAnswer) { 
-            alert('Correct')// console.log('yes')
+            alert('Correct');
+            // score = ++score;// console.log('yes')
+            // score = score+1;
+            // score += 1;
+            score++; //increment by 1 so 2 goes to 3, returns 2
+            // ++score; //increment by 1 so 2 goes to 3, returns 3,
+            
+
         } else {
            alert('That is incorrect, your time will reduce by 10 seconds!')
            secondsLeft = secondsLeft - 10; //  console.log('wrong');
@@ -166,6 +179,6 @@ btnStartGame.addEventListener("click", beginQuiz);
 
 btnPlayAgain.addEventListener("click", playAgain);
 
-btnSubmitInitials.addEventListener("click", submitInitial);
+// btnSubmitInitials.addEventListener("click", submitInitial);
 
-btnViewHighScores.addEventListener("click", highScores)
+// btnViewHighScores.addEventListener("click", highScores)
