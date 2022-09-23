@@ -21,34 +21,34 @@ let questions = [
         answer: 3,
     },
 
-    // {
-    //     question: "How do you insert a comment in a CSS file",
-    //     choices: ["// this is a comment //", "<!!this is a comment!!>", "/*this is a comment*/", "//this is a comment//"],
-    //     answer: 2,
-    // },
+    {
+        question: "How do you insert a comment in a CSS file",
+        choices: ["// this is a comment //", "<!!this is a comment!!>", "/*this is a comment*/", "//this is a comment//"],
+        answer: 2,
+    },
 
-    // {
-    //     question: "How do you select an element with the id=demo?",
-    //     choices: ["demo", "#demo", ".demo", "*demo"],
-    //     answer: 1,
-    // },
+    {
+        question: "How do you select an element with the id=demo?",
+        choices: ["demo", "#demo", ".demo", "*demo"],
+        answer: 1,
+    },
 
-    // {
-    //     question: "Inside which HTML element do we put the Javascript?",
-    //     choices: ["<Strings>", "<Booleans>", "<JS>", "<script>"],
-    //     answer: 3,
-    // },
+    {
+        question: "Inside which HTML element do we put the Javascript?",
+        choices: ["<Strings>", "<Booleans>", "<JS>", "<script>"],
+        answer: 3,
+    },
 
-    // {
-    //     question: "How do you declare a JavaScript variable?",
-    //     choices: ["var myPassword", "v myPassword", "variable myPassword", "my variable is declared"],
-    //     answer: 0,
-    // }
+    {
+        question: "How do you declare a JavaScript variable?",
+        choices: ["var myPassword", "v myPassword", "variable myPassword", "my variable is declared"],
+        answer: 0,
+    }
 ];
 
 let quizQuestions = document.querySelector('.questions');
 
-let secondsLeft = 10;
+let secondsLeft = 30;
 
 function setTime() {
     let timerInterval = setInterval(function () {
@@ -121,11 +121,31 @@ function finalScore() {
         initial: $("#initials").val(),
     }
 
+// get the value from local storage.
+// if value is null
+//save the currents users score as high score
+    let existingHighUser = localStorage.getItem("initials");
+    let existingHighScore = localStorage.getItem("higherScore");
+
+    if (existingHighScore == null && existingHighUser == null) {
+        localStorage.setItem("higherScore", score);
+        localStorage.setItem("initials", endingScore.initial);
+    }
+    //if new user score higher than existing score
+    // save new/current user score
+    else if (score > existingHighScore) {
+        localStorage.setItem("higherScore", score);
+        localStorage.setItem("initials", endingScore.initial);
+    }
+
+
+
 
     //   console.log(higherScore);
-    // let val = localStorage.getItem("endingScore");
+
 
     // const higherScore = JSON.parse(localStorage.getItem())
+    $("#highestSavedScore").text(localStorage.getItem("initials") + " has the high score of " + localStorage.getItem("higherScore"));
 }
 
 // function checkHighScore() {
