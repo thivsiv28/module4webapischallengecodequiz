@@ -1,3 +1,5 @@
+//variables
+
 let timer = document.querySelector(".time");
 let btnStartGame = document.querySelector("#startGameBtn");
 let btnPlayAgain = document.querySelector(".replay");
@@ -7,9 +9,9 @@ const startingPage = document.getElementById("startingPage");
 let finalPage = document.getElementById(".scores");
 let currentQuestionIndex = 0;
 let finalResults = document.querySelector("#finals");
+let quizQuestions = document.querySelector('.questions');
+let secondsLeft = 30;
 let score = 0;
-
-
 let questions = [
     {
         question: "What does HTML stand for?",
@@ -45,10 +47,7 @@ let questions = [
         answer: 0,
     }
 ];
-
-let quizQuestions = document.querySelector('.questions');
-
-let secondsLeft = 30;
+//timer function
 
 function setTime() {
     let timerInterval = setInterval(function () {
@@ -63,6 +62,7 @@ function setTime() {
     }, 1000);
 };
 
+//ending game logic and display score text
 function endGame() {
     timer.style.display = "block";
     timer.textContent = ("DONE-GAME FINISHED");
@@ -72,13 +72,7 @@ function endGame() {
     $("#finals").text("Your score is:" + score);
 
 }
-
-/* 
-            display initials along with score
-            automattically save the highest score
-            display score when highscore button clicked*/
-
-
+// click button to start game and roll out this function
 function beginQuiz() {
     timer.style.display = "block";
     startingPage.style.display = "none";
@@ -88,6 +82,7 @@ function beginQuiz() {
     quizContent();
 };
 
+// showing questions and answers
 function quizContent() {
 
 
@@ -139,35 +134,16 @@ function finalScore() {
     }
 
 
-
-
-    //   console.log(higherScore);
-
-
-    // const higherScore = JSON.parse(localStorage.getItem())
-    $("#highestSavedScore").text(localStorage.getItem("initials") + " has the high score of " + localStorage.getItem("higherScore"));
+    $("#highestSavedScore").text(localStorage.getItem("initials") + " has the last high score of " + localStorage.getItem("higherScore"));
 }
 
-// function checkHighScore() {
-//    
-
-// function viewHighScore() {
-
-//     let recentScore = JSON.parse(localStorage.getItem(endingScore));
-//     if (recentScore == null) {
-//         finalResults.innerHTML = "Not Available Yet"
-//     }
-
-//     else {
-//         finalResults.innerHTML = recentScore.initial + recentScore.score;
-//     }
-// };
-
+// reload game function
 function playAgain() {
 
     location.reload();
 };
 
+//correct aanswer and wrong answer logic function
 $(document).ready(function () {
     $("#submitAnswer").click(function (event) {
         event.preventDefault();
@@ -205,11 +181,10 @@ $(document).ready(function () {
     });
 });
 
+// event listeners
+
 btnStartGame.addEventListener("click", beginQuiz);
 
 btnPlayAgain.addEventListener("click", playAgain);
 
 btnSubmitInitials.click("click", finalScore);
-
-
-// btnViewHighScores.addEventListener("click", viewHighScore);
