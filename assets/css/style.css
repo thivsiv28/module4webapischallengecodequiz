@@ -1,9 +1,13 @@
+/*universal selectors*/
+
 * {
   box-sizing: border-box;
   font-size: 20px;
   margin: 0;
   padding: 0;
 }
+
+/*element selectors*/
 
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -12,32 +16,11 @@ body {
   background-color: rgb(194, 178, 164);
 }
 
-.title {
+/*ID selectors*/
 
-  text-align: center;
-}
-
-
-.intro {
-  text-align: center;
-}
-
-.container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-}
-
-.center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.answerChoice {
+  display: block;
+  width: 500px;
 }
 
 .btn {
@@ -51,11 +34,32 @@ button {
   margin-bottom: 9px;
 }
 
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
 .hidden {
   display: none;
 }
 
-.answerChoice {
-  display: block;
-  width: 500px;
+.intro {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
 }

@@ -1,16 +1,16 @@
-var timer = document.querySelector(".time");
-var btnStartGame = document.querySelector("#startGameBtn");
-var btnPlayAgain = document.querySelector(".replay");
+let timer = document.querySelector(".time");
+let btnStartGame = document.querySelector("#startGameBtn");
+let btnPlayAgain = document.querySelector(".replay");
 const btnSubmitInitials = $("#submitInitials");
-var btnViewHighScores = document.querySelector(".highscore");
+let btnViewHighScores = document.querySelector(".highscore");
 const startingPage = document.getElementById("startingPage");
 let finalPage = document.getElementById(".scores");
 let currentQuestionIndex = 0;
-let finalResults = document.querySelector("#finalscore");
+let finalResults = document.querySelector("#finals");
 let score = 0;
 
 
-var questions = [
+let questions = [
     {
         question: "What does HTML stand for?",
         choices: [
@@ -46,12 +46,12 @@ var questions = [
     // }
 ];
 
-var quizQuestions = document.querySelector('.questions');
+let quizQuestions = document.querySelector('.questions');
 
 let secondsLeft = 10;
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+    let timerInterval = setInterval(function () {
         secondsLeft--;
         timer.textContent = "Time Remaining: " + secondsLeft;
 
@@ -69,7 +69,7 @@ function endGame() {
     $("#scores").show();
     $("#questions").hide();
     secondsLeft = 0;
-    $("#finalscore").text("Your score is:" + score);
+    $("#finals").text("Your score is:" + score);
 
 }
 
@@ -89,7 +89,7 @@ function beginQuiz() {
 };
 
 function quizContent() {
-    //getting the questions to show up one by one
+
 
     let currentQuestion = questions[currentQuestionIndex];
     $("#question").text(currentQuestion.question);
@@ -121,26 +121,26 @@ function finalScore() {
         initial: $("#initials").val(),
     }
 
-    console.log("endingScore"),
-        localStorage.setItem("endingScore", JSON.stringify(endingScore));
+
+    //   console.log(higherScore);
+    // let val = localStorage.getItem("endingScore");
+
+    // const higherScore = JSON.parse(localStorage.getItem())
 }
 
-function viewHighScore() {
+// function checkHighScore() {
+//    
 
-    let recentScore = JSON.parse(localStorage.getItem(endingScore));
-    if (recentScore == null) {
-        finalResults.innerHTML = "Not Available Yet"
-    }
-    //have to make the display unhidden here and how to get the score up plus also making last page go away
-    else {
-        finalResults.innerHTML = recentScore.initial + recentScore.score;
-    }
-};
+// function viewHighScore() {
 
-// function increment() {
-//     var counterPoints= document.querySelector("#finalscore");
-//     counterPoints.innerText = ++score;
-//     finalScore.style.display = "block";
+//     let recentScore = JSON.parse(localStorage.getItem(endingScore));
+//     if (recentScore == null) {
+//         finalResults.innerHTML = "Not Available Yet"
+//     }
+
+//     else {
+//         finalResults.innerHTML = recentScore.initial + recentScore.score;
+//     }
 // };
 
 function playAgain() {
@@ -151,39 +151,31 @@ function playAgain() {
 $(document).ready(function () {
     $("#submitAnswer").click(function (event) {
         event.preventDefault();
-      
+
         let correctAnswer = questions[currentQuestionIndex].answer;
 
         let userAnswer = $("input[name=choice]:checked").val();
 
         if (userAnswer == correctAnswer) {
-            // alert('Correct');
-            // score = ++score;// console.log('yes')
-            // score = score+1;
-            // score += 1;
-            score++; //increment by 1 so 2 goes to 3, returns 2
-            // ++score; //increment by 1 so 2 goes to 3, returns 3,
 
+            score++;
 
         } else {
-            // alert('That is incorrect, your time will reduce by 10 seconds!')
-            secondsLeft = secondsLeft - 10; //  console.log('wrong');
+
+            secondsLeft = secondsLeft - 10;
         }
 
         $(".answerChoice").remove();
 
-        // let choices = document.querySelector(".answerChoice");
-        // for (let choice of choices) {
-        //     choice.remove();
-        // }
+
 
         currentQuestionIndex++;
 
         if (currentQuestionIndex == questions.length) {
-            //   increment()
-            
 
-           
+
+
+
             endGame();
             console.log('reached end of questions');
         } else {
@@ -197,7 +189,7 @@ btnStartGame.addEventListener("click", beginQuiz);
 
 btnPlayAgain.addEventListener("click", playAgain);
 
-btnSubmitInitials.click(finalScore);
+btnSubmitInitials.click("click", finalScore);
 
 
-btnViewHighScores.addEventListener("click", viewHighScore);
+// btnViewHighScores.addEventListener("click", viewHighScore);
